@@ -1,32 +1,29 @@
-package org.example.tpremise.JDBC;
+package org.example.tpremise.service;
 
-import org.example.tpremise.service.ReductionService;
 import org.example.tpremise.exception.RemiseException;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.example.tpremise.repository.RemiseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class ReductionDBService implements ReductionService {
+    private final RemiseRepository remiseRepository;
 
-    private final JdbcTemplate jdbcTemplate;
-
-    public ReductionDBService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public ReductionDBService(RemiseRepository remiseRepository) {
+        this.remiseRepository = remiseRepository;
     }
 
     @Override
+    @Transactional
     public double calculerRemise(double montant) {
         if (montant <= 0) {
             throw new RemiseException("Le montant doit etre superieur a 0");
         }
 
-        List<Double> taux = jdbcTemplate.query(
-                "SELECT taux FROM REMISE WHERE ? BETWEEN montant_min AND montant_max LIMIT 1",
-                (rs, rowNum) -> rs.getDouble("taux"),
-                montant
-        );
+        List<Double> taux = remiseRepository.getTaux(montant);
 
         if (taux.isEmpty()) {
             throw new RemiseException("Aucune tranche de remise trouve pour le montant: " + montant);
