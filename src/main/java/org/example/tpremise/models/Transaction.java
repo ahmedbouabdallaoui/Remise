@@ -1,8 +1,13 @@
 package org.example.tpremise.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "TRANSACTION")
 public class Transaction {
@@ -23,4 +28,13 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "remise_id")
     private Remise remise;
+
+    public Transaction() {}
+
+    public Transaction(double montantAvant, double montantApres, Remise remise) {
+        this.setDate(java.time.LocalDateTime.now());
+        this.setMontantAvant(montantAvant);
+        this.setMontantApres(montantApres);
+        this.setRemise(remise);
+    }
 }

@@ -5,11 +5,11 @@ CREATE TABLE IF NOT EXISTS REMISE (
     taux DOUBLE NOT NULL
 );
 
-    CREATE TABLE IF NOT EXISTS "TRANSACTION" (
-        id BIGINT PRIMARY KEY AUTO_INCREMENT,
-        date TIMESTAMP NOT NULL,
-        montant_avant DOUBLE NOT NULL,
-        montant_apres DOUBLE NOT NULL,
-        remise_id BIGINT,
-        CONSTRAINT fk_transaction_remise FOREIGN KEY (remise_id) REFERENCES REMISE(id)
-    );
+CREATE TABLE IF NOT EXISTS "TRANSACTION" (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    date TIMESTAMP NOT NULL,
+    montant_avant DOUBLE NOT NULL,
+    montant_apres DOUBLE NOT NULL,
+    remise_id BIGINT,
+    CONSTRAINT fk_transaction_remise FOREIGN KEY (remise_id) REFERENCES REMISE(id)
+);
