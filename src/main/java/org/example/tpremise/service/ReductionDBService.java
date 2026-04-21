@@ -5,8 +5,6 @@ import org.example.tpremise.repositories.RemiseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 public class ReductionDBService implements ReductionService {
     private final RemiseRepository remiseRepository;
@@ -22,12 +20,12 @@ public class ReductionDBService implements ReductionService {
             throw new RemiseException("Le montant doit etre superieur a 0");
         }
 
-        List<Double> taux = remiseRepository.getTaux(montant);
+        Double taux = remiseRepository.getTaux(montant);
 
-        if (taux.isEmpty()) {
+        if (taux == null) {
             throw new RemiseException("Aucune tranche de remise trouve pour le montant: " + montant);
         }
 
-        return montant * taux.getFirst();
+        return montant * taux;
     }
 }
