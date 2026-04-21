@@ -1,8 +1,7 @@
 package org.example.tpremise.service;
 
 import org.example.tpremise.exception.RemiseException;
-import org.example.tpremise.repository.RemiseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.tpremise.repositories.RemiseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

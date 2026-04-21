@@ -1,4 +1,4 @@
-package org.example.tpremise.repository;
+package org.example.tpremise.repositories;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
