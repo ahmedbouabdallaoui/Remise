@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Remise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "montant_min", nullable = false)
     private double montantMin;
