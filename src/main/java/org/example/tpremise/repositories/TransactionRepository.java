@@ -23,18 +23,18 @@ public class TransactionRepository {
 
     public void addTransaction(Transaction transaction) {
         jdbcTemplate.update(
-                "INSERT INTO TRANSACTION (date, montant_avant, montant_apres, remise_id) VALUES (?, ?, ?, ?)",
+                "INSERT INTO TRANSACTION (date, montant_avant, montant_apres, remise_id, utilisateur_id) VALUES (?, ?, ?, ?, ?)",
                 transaction.getDate(),
                 transaction.getMontantAvant(),
                 transaction.getMontantApres(),
-                transaction.getRemise().getId()
+                transaction.getRemise().getId(),
+                transaction.getUtilisateur().getId()
         );
-
     }
 
     public Transaction getTransactionById(int id) {
         List<Transaction> list = jdbcTemplate.query(
-                "SELECT * FROM TRANSACTION WHERE id = ?",
+                "SELECT t.*, u.nom, u.prenom FROM TRANSACTION t LEFT JOIN UTILISATEUR u ON t.utilisateur_id = u.id WHERE t.id = ?",
                 new TransactionMapper(),
                 id
         );

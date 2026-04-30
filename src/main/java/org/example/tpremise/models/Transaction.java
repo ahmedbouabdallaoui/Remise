@@ -29,12 +29,17 @@ public class Transaction {
     @JoinColumn(name = "remise_id")
     private Remise remise;
 
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_id")
+    private Utilisateur utilisateur;
+
     public Transaction() {}
 
-    public Transaction(double montantAvant, double montantApres, Remise remise) {
+    public Transaction(double montantAvant, double montantApres, Remise remise, Utilisateur utilisateur) {
         this.setDate(java.time.LocalDateTime.now());
         this.setMontantAvant(montantAvant);
         this.setMontantApres(montantApres);
         this.setRemise(remise);
+        this.setUtilisateur(utilisateur);
     }
 }

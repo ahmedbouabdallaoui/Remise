@@ -5,4 +5,5 @@ import lombok.Getter;
 @Getter
 public class CreateTransactionDTO {
     private double montant;
+    private UtilisateurDTO utilisateur;
 }
